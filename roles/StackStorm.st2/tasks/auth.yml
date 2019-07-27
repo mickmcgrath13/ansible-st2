@@ -1,8 +1,9 @@
 - name: auth | Install auth pre-reqs (Debian)
   become: yes
+  become_user: root
   apt:
     name:
-      - python-passlib
+      - python3-passlib
       - apache2-utils
     state: present
   register: _task
@@ -26,6 +27,7 @@
 
 - name: auth | Create htpasswd file
   become: true
+  become_user: root
   htpasswd:
     path: /etc/st2/htpasswd
     name: "{{ st2_auth_username }}"
@@ -36,6 +38,7 @@
 
 - name: auth | Enable authentication
   become: yes
+  become_user: root
   ini_file:
     dest: /etc/st2/st2.conf
     section: auth
@@ -48,6 +51,7 @@
 
 - name: auth | Create root's CLI configuration directory
   become: yes
+  become_user: root
   file:
     path: /root/.st2
     state: directory
@@ -55,6 +59,7 @@
 
 - name: auth | Save credentials in CLI configuration file
   become: yes
+  become_user: root
   blockinfile:
     dest: /root/.st2/config
     create: yes

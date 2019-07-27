@@ -1,0 +1,14 @@
+all:
+  hosts:
+    st2_full:
+      ansible_connection: ssh
+      ansible_host: your.host.ip.or.hostname
+      ansible_user: ubuntu
+      ansible_ssh_private_key_file: /home/ansible-st2/keys/st2.pem
+      ansible_python_interpreter: /usr/bin/python3
+  vars:
+    st2_auth_username: st2admin
+    st2_auth_password: changeme
+    nagios_users:
+      - user: nagiosadmin
+        pass: changeme

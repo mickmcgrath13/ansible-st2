@@ -80,6 +80,20 @@ Install specific numeric version of st2 with pinned revision number as well:
 ansible-playbook stackstorm.yml --extra-vars='st2_version=2.2.0 st2_revision=8'
 ```
 
+## Examples Docker
+```
+docker build -t ansible-st2 .
+docker run \
+  --rm \
+  --name ansible-st2 \
+  -v $(pwd):/ansible/playbooks \
+  -v ~/path/to/your/pem:/home/ansible-st2/keys/st2.pem \
+  -it \
+  ansible-st2
+```
+
+
+
 ## Installing behind a proxy.
 
 If you are installing from behind a proxy, you can use environment variables `http_proxy`, `https_proxy`, and `no_proxy` in the playbook. For the

@@ -7,8 +7,15 @@
     - StackStorm.rabbitmq
     - StackStorm.postgresql
     - StackStorm.st2repo
-    - StackStorm.st2
-    - StackStorm.st2mistral
+    - name: install and configure st2
+      role: StackStorm.st2
+      vars:
+        st2_version: latest
+        st2_auth_enable: yes
+        st2_save_credentials: yes
+        st2_system_user: stanley
+        st2_system_user_in_sudoers: yes
+    # - StackStorm.st2mistral
     - StackStorm.nginx
     - StackStorm.st2web
     - StackStorm.nodejs
@@ -18,3 +25,8 @@
       when: ewc_license is defined and ewc_license is not none and ewc_license | length > 0
     - role: StackStorm.ewc_smoketests
       when: ewc_license is defined and ewc_license is not none and ewc_license | length > 0
+    # https://github.com/networklore/ansible-role-nagios
+    - name: install and configure nagios
+      role: ansible-role-nagios
+      vars:
+        with_httpd_conf: /etc/apache2/conf-available
