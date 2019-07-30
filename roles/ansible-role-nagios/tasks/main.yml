@@ -71,4 +71,5 @@
   when: current_selinux_mode == 'enforcing'
 
 - name: http service state
+  become: yes
   service: name={{ apache_service }} state=started enabled=yes
